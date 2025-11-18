@@ -68,16 +68,20 @@ status-website:
         --submit-button-border-color: #9a6a08;
         --submit-button-color: #ffffff;
         
-        /* Warm background tones that complement orange */
-        --body-background-color: #fef9f3;
-        --card-background-color: #ffffff;
+        /* Better contrast - softer background with readable cards */
+        --body-background-color: #f5f0e8;
+        --body-text-color: #2d1f0a;
+        --card-background-color: #fafafa;
         --nav-background-color: #ffffff;
-        --nav-border-bottom-color: #f0e6d2;
-        --card-border-color: #f0e6d2;
+        --nav-border-bottom-color: #e6d9c8;
+        --card-border-color: #d4c4b0;
         
-        /* Status colors - keep green for up, but warmer */
+        /* Status colors - keep green for up */
         --up-border-left-color: #28a745;
         --tag-up-background-color: #28a745;
+        
+        /* Graph filters to change green/aqua to Meowcoin orange */
+        --graph-filter: hue-rotate(45deg) saturate(1.2) brightness(0.95);
       }
     }
     
@@ -90,16 +94,29 @@ status-website:
         --submit-button-border-color: #d4941c;
         --submit-button-color: #ffffff;
         
-        /* Dark theme with warm undertones */
+        /* Dark theme with warm undertones and better contrast */
         --body-background-color: #1a1611;
         --body-text-color: #f5f0e8;
-        --card-background-color: #25201a;
+        --card-background-color: #2a231a;
         --nav-background-color: #25201a;
         --nav-border-bottom-color: #3d3428;
-        --card-border-color: #3d3428;
+        --card-border-color: #4a4030;
         
         /* Status colors - keep green for up */
         --up-border-left-color: #28a745;
         --tag-up-background-color: #28a745;
+        
+        /* Graph filters to change green/aqua to Meowcoin orange */
+        --graph-filter: hue-rotate(45deg) saturate(1.2) brightness(1.1);
       }
+    }
+    
+    /* Additional card readability improvements */
+    article {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Make sure text has good contrast in cards */
+    article h4, article p, article .data {
+      color: inherit;
     }
