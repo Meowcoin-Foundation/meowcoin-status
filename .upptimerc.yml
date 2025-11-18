@@ -15,7 +15,7 @@ sites:
 
 status-website:
   cname: status.mewccrypto.com
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
+  logoUrl: https://www.mewccrypto.com/MeowcoinR2.svg
   name: Meowcoin Status
   introTitle: "Meowcoin Network Status"
   introMessage: >
