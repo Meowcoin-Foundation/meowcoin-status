@@ -5,18 +5,18 @@
     "icon": "https://icons.duckduckgo.com/ip3/api.mewccrypto.com.ico",
     "slug": "meowcoin-api",
     "status": "up",
-    "uptime": "97.83%",
-    "uptimeDay": "97.83%",
-    "uptimeWeek": "97.83%",
-    "uptimeMonth": "97.83%",
-    "uptimeYear": "97.83%",
-    "time": 225,
-    "timeDay": 225,
-    "timeWeek": 225,
-    "timeMonth": 225,
-    "timeYear": 225,
+    "uptime": "88.59%",
+    "uptimeDay": "88.59%",
+    "uptimeWeek": "88.59%",
+    "uptimeMonth": "88.59%",
+    "uptimeYear": "88.59%",
+    "time": 211,
+    "timeDay": 211,
+    "timeWeek": 211,
+    "timeMonth": 211,
+    "timeYear": 211,
     "dailyMinutesDown": {
-      "2025-11-18": 17
+      "2025-11-18": 99
     }
   },
   {
@@ -24,19 +24,19 @@
     "url": "https://explorer.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/explorer.mewccrypto.com.ico",
     "slug": "meowcoin-explorer-primary",
-    "status": "down",
-    "uptime": "95.15%",
-    "uptimeDay": "95.15%",
-    "uptimeWeek": "95.15%",
-    "uptimeMonth": "95.15%",
-    "uptimeYear": "95.15%",
-    "time": 187,
-    "timeDay": 187,
-    "timeWeek": 187,
-    "timeMonth": 187,
-    "timeYear": 187,
+    "status": "up",
+    "uptime": "85.97%",
+    "uptimeDay": "85.97%",
+    "uptimeWeek": "85.97%",
+    "uptimeMonth": "85.97%",
+    "uptimeYear": "85.97%",
+    "time": 197,
+    "timeDay": 197,
+    "timeWeek": 197,
+    "timeMonth": 197,
+    "timeYear": 197,
     "dailyMinutesDown": {
-      "2025-11-18": 37
+      "2025-11-18": 119
     }
   },
   {
@@ -44,19 +44,19 @@
     "url": "https://explorer2.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/explorer2.mewccrypto.com.ico",
     "slug": "meowcoin-explorer-fallback",
-    "status": "down",
-    "uptime": "95.36%",
-    "uptimeDay": "95.36%",
-    "uptimeWeek": "95.36%",
-    "uptimeMonth": "95.36%",
-    "uptimeYear": "95.36%",
-    "time": 215,
-    "timeDay": 215,
-    "timeWeek": 215,
-    "timeMonth": 215,
-    "timeYear": 215,
+    "status": "up",
+    "uptime": "86.15%",
+    "uptimeDay": "86.15%",
+    "uptimeWeek": "86.15%",
+    "uptimeMonth": "86.15%",
+    "uptimeYear": "86.15%",
+    "time": 234,
+    "timeDay": 234,
+    "timeWeek": 234,
+    "timeMonth": 234,
+    "timeYear": 234,
     "dailyMinutesDown": {
-      "2025-11-18": 35
+      "2025-11-18": 117
     }
   },
   {
@@ -64,19 +64,19 @@
     "url": "https://blockbook.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/blockbook.mewccrypto.com.ico",
     "slug": "blockbook-server",
-    "status": "down",
-    "uptime": "97.78%",
-    "uptimeDay": "97.78%",
-    "uptimeWeek": "97.78%",
-    "uptimeMonth": "97.78%",
-    "uptimeYear": "97.78%",
-    "time": 687,
-    "timeDay": 687,
-    "timeWeek": 687,
-    "timeMonth": 687,
-    "timeYear": 687,
+    "status": "up",
+    "uptime": "88.34%",
+    "uptimeDay": "88.34%",
+    "uptimeWeek": "88.34%",
+    "uptimeMonth": "88.34%",
+    "uptimeYear": "88.34%",
+    "time": 734,
+    "timeDay": 734,
+    "timeWeek": 734,
+    "timeMonth": 734,
+    "timeYear": 734,
     "dailyMinutesDown": {
-      "2025-11-18": 17
+      "2025-11-18": 99
     }
   },
   {
@@ -85,18 +85,18 @@
     "icon": "https://icons.duckduckgo.com/ip3/mewc-rpc-mainnet.mewccrypto.com.ico",
     "slug": "meowcoin-rpc-proxy",
     "status": "down",
-    "uptime": "95.25%",
-    "uptimeDay": "95.25%",
-    "uptimeWeek": "95.25%",
-    "uptimeMonth": "95.25%",
-    "uptimeYear": "95.25%",
+    "uptime": "86.23%",
+    "uptimeDay": "86.23%",
+    "uptimeWeek": "86.23%",
+    "uptimeMonth": "86.23%",
+    "uptimeYear": "86.23%",
     "time": 209,
     "timeDay": 209,
     "timeWeek": 209,
     "timeMonth": 209,
     "timeYear": 209,
     "dailyMinutesDown": {
-      "2025-11-18": 37
+      "2025-11-18": 119
     }
   },
   {
