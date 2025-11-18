@@ -6,8 +6,15 @@ sites:
   - name: Meowcoin API
     url: https://api.mewccrypto.com/health
 
-  - name: Meowcoin Explorer
+  - name: Meowcoin Explorer (Primary)
     url: https://explorer.mewccrypto.com
+
+  - name: Meowcoin Explorer (Fallback)
+    url: https://explorer2.mewccrypto.com
+
+  - name: Blockbook Server
+    url: https://blockbook.mewccrypto.com
+    check: "http"
 
   - name: Meowcoin RPC (Proxy)
     url: https://mewc-rpc-mainnet.mewccrypto.com
@@ -19,8 +26,9 @@ status-website:
   name: Meowcoin Status
   introTitle: "Meowcoin Network Status"
   introMessage: >
-    This page shows real-time uptime for the Meowcoin API, Explorer, RPC proxy,
-    and other core infrastructure — powered entirely by Upptime and GitHub Actions.
+    This page shows real-time uptime for the Meowcoin API, Explorers,
+    RPC proxy, Blockbook backend, and other core infrastructure —
+    powered entirely by Upptime and GitHub Actions.
 
   navbar:
     - title: Status
