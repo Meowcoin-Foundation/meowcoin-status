@@ -20,6 +20,12 @@ sites:
     url: https://mewc-rpc-mainnet.mewccrypto.com
     check: "http"
 
+  - name: Burn Explorer
+    url: https://burn.mewccrypto.com
+
+  - name: PawPledge Donation Platform
+    url: https://pawpledge.mewccrypto.com
+
 status-website:
   cname: status.mewccrypto.com
   logoUrl: https://www.mewccrypto.com/MeowcoinR2.svg
@@ -27,8 +33,8 @@ status-website:
   introTitle: "Meowcoin Network Status"
   introMessage: >
     This page shows real-time uptime for the Meowcoin API, Explorers,
-    RPC proxy, Blockbook backend, and other core infrastructure —
-    powered entirely by Upptime and GitHub Actions.
+    Blockbook backend, RPC proxy, Burn Explorer, PawPledge donations,
+    and other core infrastructure — fully automated by Upptime and GitHub Actions.
 
   navbar:
     - title: Status
