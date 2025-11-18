@@ -56,3 +56,50 @@ status-website:
       href: /
     - title: GitHub
       href: https://github.com/meowcoin-foundation/meowcoin-status
+
+  # Meowcoin-themed color customizations using primary color #be840a
+  css: |
+    /* Light theme customizations */
+    @media (prefers-color-scheme: light) {
+      :root {
+        /* Meowcoin primary orange/gold for nav and accents */
+        --nav-current-border-bottom-color: #be840a;
+        --submit-button-background-color: #be840a;
+        --submit-button-border-color: #9a6a08;
+        --submit-button-color: #ffffff;
+        
+        /* Warm background tones that complement orange */
+        --body-background-color: #fef9f3;
+        --card-background-color: #ffffff;
+        --nav-background-color: #ffffff;
+        --nav-border-bottom-color: #f0e6d2;
+        --card-border-color: #f0e6d2;
+        
+        /* Status colors - keep green for up, but warmer */
+        --up-border-left-color: #28a745;
+        --tag-up-background-color: #28a745;
+      }
+    }
+    
+    /* Dark theme customizations */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Meowcoin primary orange/gold for nav and accents */
+        --nav-current-border-bottom-color: #be840a;
+        --submit-button-background-color: #be840a;
+        --submit-button-border-color: #d4941c;
+        --submit-button-color: #ffffff;
+        
+        /* Dark theme with warm undertones */
+        --body-background-color: #1a1611;
+        --body-text-color: #f5f0e8;
+        --card-background-color: #25201a;
+        --nav-background-color: #25201a;
+        --nav-border-bottom-color: #3d3428;
+        --card-border-color: #3d3428;
+        
+        /* Status colors - keep green for up */
+        --up-border-left-color: #28a745;
+        --tag-up-background-color: #28a745;
+      }
+    }
