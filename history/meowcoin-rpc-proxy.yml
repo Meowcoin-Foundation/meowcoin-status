@@ -1,7 +1,7 @@
 url: https://mewc-rpc-mainnet.mewccrypto.com
-status: up
-code: 200
-responseTime: 277
-lastUpdated: 2025-11-18T14:52:58.350Z
+status: down
+code: 500
+responseTime: 25284
+lastUpdated: 2025-11-18T15:46:43.949Z
 startTime: 2025-11-18T00:17:31.160Z
 generator: Upptime <https://github.com/upptime/upptime>
