@@ -1,7 +1,7 @@
 url: https://explorer2.mewccrypto.com
-status: up
-code: 200
-responseTime: 247
-lastUpdated: 2025-11-18T12:16:04.852Z
+status: down
+code: 500
+responseTime: 111
+lastUpdated: 2025-11-18T13:20:01.769Z
 startTime: 2025-11-18T00:35:05.500Z
 generator: Upptime <https://github.com/upptime/upptime>
