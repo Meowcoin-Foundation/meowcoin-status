@@ -26,6 +26,21 @@ sites:
   - name: PawPledge Donation Platform
     url: https://pawpledge.mewccrypto.com
 
+  - name: ElectrumX - meowcoinelectrum.xyz
+    url: meowcoinelectrum.xyz
+    port: 50002
+    check: "tcp-ping"
+
+  - name: ElectrumX - electrum.mewccrypto.com
+    url: electrum.mewccrypto.com
+    port: 50002
+    check: "tcp-ping"
+
+  - name: ElectrumX - Topper
+    url: meowelectrum2.testtopper.biz
+    port: 50002
+    check: "tcp-ping"
+
 status-website:
   cname: status.mewccrypto.com
   logoUrl: https://www.mewccrypto.com/MeowcoinR2.svg
