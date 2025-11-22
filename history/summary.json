@@ -105,19 +105,19 @@
     "url": "https://burn.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/burn.mewccrypto.com.ico",
     "slug": "burn-explorer",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.99%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 280,
-    "timeDay": 182,
-    "timeWeek": 280,
-    "timeMonth": 280,
-    "timeYear": 280,
+    "status": "up",
+    "uptime": "99.85%",
+    "uptimeDay": "99.28%",
+    "uptimeWeek": "99.85%",
+    "uptimeMonth": "99.85%",
+    "uptimeYear": "99.85%",
+    "time": 278,
+    "timeDay": 219,
+    "timeWeek": 278,
+    "timeMonth": 278,
+    "timeYear": 278,
     "dailyMinutesDown": {
-      "2025-11-22": 0
+      "2025-11-22": 10
     }
   },
   {
@@ -125,19 +125,19 @@
     "url": "https://pawpledge.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/pawpledge.mewccrypto.com.ico",
     "slug": "paw-pledge-donation-platform",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.99%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 220,
-    "timeDay": 173,
-    "timeWeek": 220,
-    "timeMonth": 220,
-    "timeYear": 220,
+    "status": "up",
+    "uptime": "99.85%",
+    "uptimeDay": "99.28%",
+    "uptimeWeek": "99.85%",
+    "uptimeMonth": "99.85%",
+    "uptimeYear": "99.85%",
+    "time": 216,
+    "timeDay": 175,
+    "timeWeek": 216,
+    "timeMonth": 216,
+    "timeYear": 216,
     "dailyMinutesDown": {
-      "2025-11-22": 0
+      "2025-11-22": 10
     }
   },
   {
