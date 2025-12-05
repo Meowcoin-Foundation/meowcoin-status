@@ -1,7 +1,7 @@
 url: electrum.mewccrypto.com
-status: down
-code: 0
-responseTime: 0
-lastUpdated: 2025-12-05T20:49:40.067Z
+status: up
+code: 200
+responseTime: 69
+lastUpdated: 2025-12-05T21:25:56.812Z
 startTime: 2025-11-18T00:56:06.551Z
 generator: Upptime <https://github.com/upptime/upptime>
