@@ -169,19 +169,19 @@
     "url": "electrum.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "electrum-x-electrum-mewccrypto-com",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.99%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 34,
-    "timeDay": 2,
-    "timeWeek": 34,
-    "timeMonth": 34,
-    "timeYear": 34,
+    "status": "up",
+    "uptime": "99.86%",
+    "uptimeDay": "97.48%",
+    "uptimeWeek": "99.64%",
+    "uptimeMonth": "99.86%",
+    "uptimeYear": "99.86%",
+    "time": 36,
+    "timeDay": 36,
+    "timeWeek": 39,
+    "timeMonth": 36,
+    "timeYear": 36,
     "dailyMinutesDown": {
-      "2025-12-05": 0
+      "2025-12-05": 36
     }
   },
   {
