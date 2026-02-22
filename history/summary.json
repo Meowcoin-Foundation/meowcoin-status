@@ -75,7 +75,7 @@
     "url": "https://blockbook.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/blockbook.mewccrypto.com.ico",
     "slug": "blockbook-server",
-    "status": "up",
+    "status": "down",
     "uptime": "93.51%",
     "uptimeDay": "67.95%",
     "uptimeWeek": "87.28%",
@@ -83,7 +83,7 @@
     "uptimeYear": "93.51%",
     "time": 6288,
     "timeDay": 10204,
-    "timeWeek": 10293,
+    "timeWeek": 10047,
     "timeMonth": 9670,
     "timeYear": 6288,
     "dailyMinutesDown": {
