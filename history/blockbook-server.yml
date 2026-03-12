@@ -1,7 +1,7 @@
 url: https://blockbook.mewccrypto.com
-status: up
-code: 200
-responseTime: 23976
-lastUpdated: 2026-03-12T06:56:58.458Z
+status: down
+code: 502
+responseTime: 10154
+lastUpdated: 2026-03-12T08:05:42.536Z
 startTime: 2025-11-18T00:35:06.126Z
 generator: Upptime <https://github.com/upptime/upptime>
