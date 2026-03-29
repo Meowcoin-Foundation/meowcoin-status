@@ -13,7 +13,7 @@
     "time": 252,
     "timeDay": 222,
     "timeWeek": 253,
-    "timeMonth": 278,
+    "timeMonth": 276,
     "timeYear": 252,
     "dailyMinutesDown": {
       "2025-11-18": 99
@@ -53,7 +53,7 @@
     "time": 222,
     "timeDay": 207,
     "timeWeek": 262,
-    "timeMonth": 240,
+    "timeMonth": 235,
     "timeYear": 222,
     "dailyMinutesDown": {
       "2026-03-20": 23,
@@ -77,18 +77,19 @@
     "url": "https://blockbook.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/blockbook.mewccrypto.com.ico",
     "slug": "blockbook-server",
-    "status": "up",
-    "uptime": "97.60%",
-    "uptimeDay": "95.32%",
+    "status": "down",
+    "uptime": "97.61%",
+    "uptimeDay": "95.31%",
     "uptimeWeek": "96.70%",
-    "uptimeMonth": "89.68%",
-    "uptimeYear": "97.60%",
+    "uptimeMonth": "89.72%",
+    "uptimeYear": "97.61%",
     "time": 8872,
     "timeDay": 8805,
     "timeWeek": 7739,
-    "timeMonth": 10913,
+    "timeMonth": 10853,
     "timeYear": 8872,
     "dailyMinutesDown": {
+      "2026-03-29": 0,
       "2026-03-28": 68,
       "2026-03-27": 101,
       "2026-03-26": 54,
@@ -108,7 +109,7 @@
       "2026-03-07": 120,
       "2026-03-06": 261,
       "2026-03-05": 41,
-      "2026-03-03": 271
+      "2026-03-03": 254
     }
   },
   {
@@ -125,7 +126,7 @@
     "time": 362,
     "timeDay": 75,
     "timeWeek": 210,
-    "timeMonth": 232,
+    "timeMonth": 231,
     "timeYear": 362,
     "dailyMinutesDown": {
       "2026-03-20": 41,
@@ -152,12 +153,12 @@
     "uptime": "99.95%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
+    "uptimeMonth": "99.96%",
     "uptimeYear": "99.95%",
     "time": 258,
     "timeDay": 130,
     "timeWeek": 208,
-    "timeMonth": 241,
+    "timeMonth": 243,
     "timeYear": 258,
     "dailyMinutesDown": {
       "2026-02-28": 16,
@@ -177,12 +178,12 @@
     "uptime": "99.96%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
+    "uptimeMonth": "99.96%",
     "uptimeYear": "99.96%",
     "time": 246,
     "timeDay": 98,
     "timeWeek": 202,
-    "timeMonth": 222,
+    "timeMonth": 224,
     "timeYear": 246,
     "dailyMinutesDown": {
       "2026-02-28": 16,
@@ -206,7 +207,7 @@
     "time": 32,
     "timeDay": 5,
     "timeWeek": 31,
-    "timeMonth": 35,
+    "timeMonth": 34,
     "timeYear": 32,
     "dailyMinutesDown": {
       "2026-03-20": 40,
@@ -239,7 +240,7 @@
     "time": 34,
     "timeDay": 16,
     "timeWeek": 32,
-    "timeMonth": 41,
+    "timeMonth": 40,
     "timeYear": 34,
     "dailyMinutesDown": {
       "2025-12-05": 36
@@ -259,7 +260,7 @@
     "time": 42,
     "timeDay": 19,
     "timeWeek": 40,
-    "timeMonth": 48,
+    "timeMonth": 47,
     "timeYear": 42,
     "dailyMinutesDown": {}
   }
