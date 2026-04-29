@@ -79,12 +79,12 @@
     "url": "https://blockbook.mewccrypto.com",
     "icon": "https://icons.duckduckgo.com/ip3/blockbook.mewccrypto.com.ico",
     "slug": "blockbook-server",
-    "status": "up",
-    "uptime": "97.77%",
-    "uptimeDay": "93.73%",
+    "status": "down",
+    "uptime": "97.79%",
+    "uptimeDay": "93.72%",
     "uptimeWeek": "90.39%",
-    "uptimeMonth": "94.46%",
-    "uptimeYear": "97.77%",
+    "uptimeMonth": "94.45%",
+    "uptimeYear": "97.79%",
     "time": 8828,
     "timeDay": 8447,
     "timeWeek": 9149,
@@ -121,7 +121,7 @@
       "2026-03-19": 710,
       "2026-03-18": 372,
       "2026-03-16": 584,
-      "2026-03-15": 243
+      "2026-03-15": 201
     }
   },
   {
