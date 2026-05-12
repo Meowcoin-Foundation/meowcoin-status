@@ -12,33 +12,50 @@ sites:
   - name: Meowcoin Explorer (Fallback)
     url: https://explorer2.mewccrypto.com
 
-  - name: Blockbook Server
-    url: https://blockbook.mewccrypto.com
-    check: "http"
-
-  - name: Meowcoin RPC (Proxy)
-    url: https://mewc-rpc-mainnet.mewccrypto.com
-    check: "http"
-
   - name: Burn Explorer
     url: https://burn.mewccrypto.com
 
   - name: PawPledge Donation Platform
     url: https://pawpledge.mewccrypto.com
 
-  - name: ElectrumX - meowcoinelectrum.xyz
-    url: meowcoinelectrum.xyz
+  - name: electrs.mewccrypto.com (SSL)
+    url: electrs.mewccrypto.com
     port: 50002
     check: "tcp-ping"
 
-  - name: ElectrumX - electrum.mewccrypto.com
-    url: electrum.mewccrypto.com
+  - name: electrs.mewccrypto.com (WebSocket)
+    url: electrs.mewccrypto.com
+    port: 50004
+    check: "tcp-ping"
+
+  - name: electrs2.mewccrypto.com (SSL)
+    url: electrs2.mewccrypto.com
     port: 50002
     check: "tcp-ping"
 
-  - name: ElectrumX - Topper
-    url: meowelectrum2.testtopper.biz
+  - name: electrs2.mewccrypto.com (WebSocket)
+    url: electrs2.mewccrypto.com
+    port: 50004
+    check: "tcp-ping"
+
+  - name: electrs3.meowcoin.org (SSL)
+    url: electrs3.meowcoin.org
     port: 50002
+    check: "tcp-ping"
+
+  - name: electrs3.meowcoin.org (WebSocket)
+    url: electrs3.meowcoin.org
+    port: 50004
+    check: "tcp-ping"
+
+  - name: electrs4.meowcoin.org (SSL)
+    url: electrs4.meowcoin.org
+    port: 50002
+    check: "tcp-ping"
+
+  - name: electrs4.meowcoin.org (WebSocket)
+    url: electrs4.meowcoin.org
+    port: 50004
     check: "tcp-ping"
 
 status-website:
@@ -48,7 +65,7 @@ status-website:
   introTitle: "Meowcoin Network Status"
   introMessage: >
     This page shows real-time uptime for the Meowcoin API, Explorers,
-    Blockbook backend, RPC proxy, Burn Explorer, PawPledge donations,
+    Electrs servers (SSL &amp; WebSocket), Burn Explorer, PawPledge donations,
     and other core infrastructure — fully automated by Upptime and GitHub Actions.
 
   navbar:
