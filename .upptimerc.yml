@@ -58,6 +58,16 @@ sites:
     port: 50004
     check: "tcp-ping"
 
+  - name: electrs5.meowcoin.org (SSL)
+    url: electrs5.meowcoin.org
+    port: 50002
+    check: "tcp-ping"
+
+  - name: electrs5.meowcoin.org (WebSocket)
+    url: electrs5.meowcoin.org
+    port: 50004
+    check: "tcp-ping"
+
 status-website:
   cname: status.mewccrypto.com
   logoUrl: https://www.mewccrypto.com/MeowcoinR2.svg
