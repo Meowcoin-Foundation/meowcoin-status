@@ -1,7 +1,7 @@
 url: https://api.mewccrypto.com/health
-status: down
-code: 503
-responseTime: 356
-lastUpdated: 2026-05-15T23:20:25.965Z
+status: up
+code: 200
+responseTime: 90
+lastUpdated: 2026-05-16T04:34:45.666Z
 startTime: 2025-11-18T00:17:29.904Z
 generator: Upptime <https://github.com/upptime/upptime>
