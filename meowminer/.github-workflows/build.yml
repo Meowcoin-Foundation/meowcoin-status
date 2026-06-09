@@ -1,0 +1,53 @@
+# CI for the Meowcoin-Foundation/MeowMiner repo.
+# NOTE: this file lives at .github-workflows/build.yml in the handoff tree;
+# rename the directory to .github/workflows/ when moving into the MeowMiner repo
+# (kept out of .github/ here so it does not run inside meowcoin-status).
+name: Build MeowMiner
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e . pytest torch --index-url https://pypi.org/simple
+      - run: pytest tests/ -q
+
+  bundle:
+    # Self-contained rig bundle: meowminer wheel + pearl_mining manylinux wheel
+    # + install.sh. The rigs' miner-downloader.sh fetches this from releases.
+    runs-on: ubuntu-24.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build meowminer wheel
+        run: pip install build && python -m build --wheel -o dist/
+      - name: Build pearl_mining wheel
+        run: |
+          git clone --depth 1 https://github.com/pearl-research-labs/pearl /tmp/pearl
+          pip install maturin
+          maturin build --release -m /tmp/pearl/py-pearl-mining/Cargo.toml -o dist/
+      - name: Assemble bundle
+        run: |
+          mkdir bundle && cp dist/*.whl bundle/
+          cp packaging/install.sh bundle/
+          tar czf meowminer-bundle.tar.gz -C bundle .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: meowminer-bundle
+          path: meowminer-bundle.tar.gz
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: meowminer-bundle.tar.gz

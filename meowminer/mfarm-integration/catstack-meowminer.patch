@@ -1,0 +1,65 @@
+diff --git a/mfarm/miners/registry.py b/mfarm/miners/registry.py
+index f9a4df2..8f67c7a 100644
+--- a/mfarm/miners/registry.py
++++ b/mfarm/miners/registry.py
+@@ -167,6 +167,7 @@ _register(MinerDefinition(
+         "ghostrider", "dynamo", "yespower",
+         "verthash", "heavyhash", "karlsenhash",
+         "pyrinhash", "sha512_256d_radiant",
++        "pearlhash",
+     ],
+     gpu_type="any",
+     api_type="srbminer_http",
+@@ -175,6 +176,21 @@ _register(MinerDefinition(
+ ))
+ 
+ 
++_register(MinerDefinition(
++    name="meowminer",
++    display_name="MeowMiner (Pearl PRL, no dev fee)",
++    # Python entry point installed by the meowminer wheel; the wrapper invokes
++    # it as `meowminer --pool ... --wallet ... --worker ...`.
++    binary_name="meowminer/meowminer",
++    supported_algos=["pearlhash"],
++    gpu_type="nvidia",
++    # No HTTP/TCP API yet -- the agent parses /var/log/mfarm/miner.log
++    # ("X.XX TH/s | A:n R:n S:n" lines from meowminer's stats logger).
++    api_type="meowminer_log",
++    default_api_port=0,
++    supports_solo=False,
++))
++
+ def get_miner(name: str) -> MinerDefinition | None:
+     return MINERS.get(name.lower())
+ 
+diff --git a/mfarm/worker/miner-downloader.sh b/mfarm/worker/miner-downloader.sh
+index 56ab885..2f6495b 100644
+--- a/mfarm/worker/miner-downloader.sh
++++ b/mfarm/worker/miner-downloader.sh
+@@ -74,6 +74,26 @@ download "srbminer" \
+     "https://github.com/doktor83/SRBMiner-Multi/releases/download/2.8.3/SRBMiner-Multi-2-8-3-Linux.tar.xz" \
+     "SRBMiner-Multi"
+ 
++
++# MeowMiner (NVIDIA, Pearl PRL) -- self-contained pyz + pearl_mining wheel from
++# the MeowMiner releases page. Installed as a directory, not a single binary.
++install_meowminer() {
++    if [ "$TARGET" != "all" ] && [ "$TARGET" != "meowminer" ]; then return; fi
++    echo "  Installing meowminer..."
++    mkdir -p "$DEST/meowminer"
++    cd /tmp && rm -rf dl-meowminer && mkdir dl-meowminer && cd dl-meowminer
++    wget -q "https://github.com/Meowcoin-Foundation/MeowMiner/releases/latest/download/meowminer-bundle.tar.gz" -O bundle.tgz \
++        || { echo "  FAILED: meowminer bundle download"; return; }
++    tar xzf bundle.tgz
++    # bundle layout: install.sh creates a venv under $DEST/meowminer/venv,
++    # installs the wheels (meowminer, pearl_mining, torch), and links
++    # $DEST/meowminer/meowminer to venv/bin/meowminer.
++    bash install.sh "$DEST/meowminer" || { echo "  FAILED: meowminer install"; return; }
++    echo "  OK: $DEST/meowminer/meowminer"
++    cd /tmp && rm -rf dl-meowminer
++}
++install_meowminer
++
+ echo ""
+ echo "=== Installed miners ==="
+ ls -lh "$DEST/"
