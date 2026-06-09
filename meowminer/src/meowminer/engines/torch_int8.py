@@ -68,6 +68,11 @@ class TorchInt8Engine:
         if config.common_dim % config.rank:
             raise ValueError("common_dim must be a multiple of rank")
         self._cfg = config
+        self._gpu_hash = None
+        if self.device.type == "cuda":
+            from . import gpu_hash
+
+            self._gpu_hash = gpu_hash.load()
 
         row_parts = config.rows_pattern.partitions(self._m)
         col_parts = config.cols_pattern.partitions(self._n)
@@ -100,12 +105,22 @@ class TorchInt8Engine:
             a8 = torch.randint(SIGNAL_MIN, SIGNAL_MAX + 1, (m, k), dtype=torch.int8, device=self.device, generator=gen)
             bt8 = torch.randint(SIGNAL_MIN, SIGNAL_MAX + 1, (n, k), dtype=torch.int8, device=self.device, generator=gen)
 
-            # 2. commitment seeds (CPU blake3 over the exact committed bytes)
-            a_np = a8.cpu().numpy()
-            bt_np = bt8.cpu().numpy()
-            a_bytes = pad_to_chunk_boundary(a_np.astype(np.uint8).tobytes())
-            bt_bytes = pad_to_chunk_boundary(bt_np.astype(np.uint8).tobytes())
-            b_seed, a_seed = compute_commitment_seeds(job_key, a_bytes, bt_bytes)
+            # 2. commitment seeds. With the CUDA extension the keyed blake3
+            # roots of the (chunk-padded) matrices are computed on-device and
+            # the matrices never cross PCIe unless a share hits; otherwise
+            # fall back to CPU blake3 over host copies.
+            if self._gpu_hash is not None:
+                hash_a = self._matrix_root_gpu(a8, job_key)
+                hash_b = self._matrix_root_gpu(bt8, job_key)
+                b_seed = blake3(job_key + hash_b).digest()
+                a_seed = blake3(b_seed + hash_a).digest()
+                a_np = bt_np = None  # fetched lazily on hit
+            else:
+                a_np = a8.cpu().numpy()
+                bt_np = bt8.cpu().numpy()
+                a_bytes = pad_to_chunk_boundary(a_np.astype(np.uint8).tobytes())
+                bt_bytes = pad_to_chunk_boundary(bt_np.astype(np.uint8).tobytes())
+                b_seed, a_seed = compute_commitment_seeds(job_key, a_bytes, bt_bytes)
 
             # 3. deterministic noise (reference generator), applied on GPU
             from ..vendor.noise_generation import NoiseGenerator
@@ -134,14 +149,61 @@ class TorchInt8Engine:
                 j = jack[:, :, tid]
                 jack[:, :, tid] = _rotl32(j, LROT_PER_TILE) ^ xored
 
-            # 6. grade: per-partition keyed blake3 of the 64-byte jackpot (CPU pool)
-            jack_np = jack.cpu().numpy().astype("<i4").view("<u4").reshape(R * C, JACKPOT_SIZE)
-            hits = self._grade(job, a_np, bt_np, jack_np, a_seed, share_bound, block_bound)
+            # 6. grade: per-partition keyed blake3 of the 64-byte jackpot.
+            # On-device when the CUDA extension is available (v1 fast path);
+            # CPU thread-pool blake3 otherwise (v0 fallback).
+            if self._gpu_hash is not None:
+                hits = self._grade_gpu(job, a8, bt8, jack.view(R * C, JACKPOT_SIZE),
+                                       a_seed, share_bound, block_bound)
+            else:
+                jack_np = jack.cpu().numpy().astype("<i4").view("<u4").reshape(R * C, JACKPOT_SIZE)
+                hits = self._grade(job, a_np, bt_np, jack_np, a_seed, share_bound, block_bound)
 
             stats = AttemptStats(attempts=1, partitions=R * C, macs=R * C * cfg.difficulty_adjustment)
             yield hits, stats
 
     # -- grading -------------------------------------------------------------
+
+    def _matrix_root_gpu(self, mat_i8, job_key: bytes) -> bytes:
+        """Keyed blake3 root of the chunk-padded row-major matrix bytes, on-device."""
+        torch = self.torch
+        flat = mat_i8.reshape(-1).view(torch.uint8)
+        rem = flat.numel() % 1024
+        if rem:
+            flat = torch.cat([flat, torch.zeros(1024 - rem, dtype=torch.uint8, device=flat.device)])
+        key = torch.frombuffer(bytearray(job_key), dtype=torch.uint8)
+        return bytes(self._gpu_hash.blake3_root(flat.contiguous(), key).numpy().tobytes())
+
+    def _grade_gpu(self, job, a8, bt8, jack_dev, a_seed, share_bound, block_bound) -> list[Hit]:
+        from .gpu_hash import bound_to_le_words
+
+        torch = self.torch
+        key = torch.frombuffer(bytearray(a_seed), dtype=torch.uint8)
+        idx, hashes = self._gpu_hash.jackpot_grade(
+            jack_dev.contiguous(), key, bound_to_le_words(share_bound)
+        )
+        idx_list = idx.cpu().tolist()
+        if not idx_list:
+            return []
+        # Matrices cross PCIe only now, on an actual hit.
+        a_np = a8.cpu().numpy()
+        bt_np = bt8.cpu().numpy()
+        hits = []
+        for i in idx_list:
+            digest = bytes(hashes[i].cpu().numpy().tobytes())
+            r, c = divmod(i, len(self._col_parts))
+            hits.append(
+                Hit(
+                    job=job,
+                    a_matrix=a_np,
+                    bt_matrix=bt_np,
+                    a_rows=self._row_parts[r],
+                    b_cols=self._col_parts[c],
+                    hash_jackpot=digest,
+                    is_block=int.from_bytes(digest, "little") <= block_bound,
+                )
+            )
+        return hits
 
     def _grade(self, job, a_np, bt_np, jack_np, a_seed, share_bound, block_bound) -> list[Hit]:
         def hash_one(i: int) -> tuple[int, bytes]:

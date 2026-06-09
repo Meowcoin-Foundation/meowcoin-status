@@ -107,23 +107,31 @@ the engine has a bug — `tests/test_cross_engine.py` is the harness to extend
 group on MeowMiner, half on SRBMiner, same wallet, 24h, compare per-worker
 poolside averages on herominers. This is the metric the user cares about.
 
-### Step 3 — v1 kernel work: move the hashing onto the GPU (the actual win)
-v0's ceiling is the CPU blake3 of the A/B commitment (the GEMM:hash byte
-ratio is m·n/(m+n) — you cannot out-batch it). The reference already has GPU
-kernels for everything needed:
+### Step 3 — v1 GPU hashing: IMPLEMENTED, needs its first GPU run
+The CUDA extension exists (`csrc/blake3_core.h` + `csrc/gpu_hash.cu`) and is
+wired into the torch engine behind `engines/gpu_hash.py`:
 
-* `miner/pearl-gemm/csrc/blake3/blake3.cu` — portable CUDA blake3 (~209 lines).
-* `miner/pearl-gemm/csrc/tensor_hash/` — chunked Merkle/commitment pipeline
-  (~2k lines; entangled with cute/cutlass *types* but not with WGMMA — the
-  compute is hash arithmetic, port to plain CUDA or build with
-  `-gencode arch=compute_89,code=sm_89`).
-* Keep the GEMM itself on cuBLASLt int8 (`torch._int_mm`) — on Ada it reaches
-  80%+ of peak TOPS for 4096-class shapes, which already clears alpha-miner's
-  published numbers; the full CUTLASS sm_89 NoisyGEMM port
-  (`kernel_traits.hpp` TMA/WGMMA → cp.async/mma.sync) is optional polish.
-* Wire them behind the `hasher` seam in `engines/torch_int8.py` (the seam is
-  already there), JIT via `torch.utils.cpp_extension.load` on rigs with nvcc
-  or prebuild in CI.
+* keyed blake3 chunk-tree root of the matrix commitments on-device
+  (`blake3_root`), so matrices never cross PCIe except on a share hit;
+* per-partition jackpot blake3 + LE-256 bound compare on-device
+  (`jackpot_grade`).
+
+Validation done in the sandbox: the shared blake3 core is host-compiled and
+matches the reference `blake3` wheel exactly (keyed 64-byte path, chunk trees
+of 1..256 chunks, bound compare — tests/test_gpu_hash_core.py), and the
+kernels compile clean for sm_89 with the CUDA 13.3 pip toolchain
+(`nvcc -DMEOWMINER_KERNELS_ONLY -gencode arch=compute_89,code=sm_89`).
+What it has NOT had: a single run on a real GPU (no GPU in this sandbox).
+First desktop task: `pytest tests/` on a 4070 TiS box (extension JIT-builds
+via torch.utils.cpp_extension; needs nvcc, or prebuild in CI), then profile.
+
+Known next bottleneck after GPU hashing: the vendored noise generator's
+permutation-matrix python loop (~k iterations per attempt on CPU). Vectorize
+it or port to torch if profiling shows it dominating.
+
+The full CUTLASS sm_89 NoisyGEMM port (reference `kernel_traits.hpp`
+TMA/WGMMA → cp.async/mma.sync) remains optional polish — cuBLASLt int8 via
+`torch._int_mm` reaches 80%+ of Ada peak TOPS at 4096-class shapes.
 
 Target after step 3: ≥130 TH/s poolside per 4070 Ti Super, vs SRBMiner's
 baseline minus its 3% fee.
