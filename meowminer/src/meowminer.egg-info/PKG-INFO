@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: meowminer
+Version: 0.1.0
+Summary: MeowMiner - Pearl (PRL) pool miner for NVIDIA GPUs, no dev fee
+License: ISC
+Requires-Python: >=3.10
+Requires-Dist: numpy>=1.26
+Requires-Dist: blake3>=0.4
+Provides-Extra: gpu
+Requires-Dist: torch>=2.2; extra == "gpu"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: ruff; extra == "dev"

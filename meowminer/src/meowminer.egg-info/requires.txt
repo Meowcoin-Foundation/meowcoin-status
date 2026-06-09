@@ -1,0 +1,9 @@
+numpy>=1.26
+blake3>=0.4
+
+[dev]
+pytest>=8.0
+ruff
+
+[gpu]
+torch>=2.2

@@ -26,6 +26,14 @@ mining Pearl (PRL), higher than SRBMiner-Multi achieves on the same cards.
   Consensus-critical semantics (noise determinism, commitment seed chain,
   Merkle/chunk layout, jackpot folding, bincode wire format) are confirmed
   correct, not just believed correct.
+* **End-to-end pool test passed**: the real `meowminer` CLI mined against
+  P2Pearl's actual stratum server (the implementation validated against a
+  real SRBMiner GPU on regtest) — connected in the herominers/luckypool
+  object dialect, received jobs, and had every submitted 44 KB plain proof
+  accepted after pool-side Rust verification (1-4 ms each), zero rejects.
+* Sandbox CPU sanity bench at production dimensions (m=n=k=4096, reference
+  2x64 tile, 131072 partitions/attempt): ~8 GH/s — the pipeline holds up at
+  real sizes; the GPU run is purely a perf unknown, not a correctness one.
 * `pearl_mining` (PyO3 bindings from pearl-research-labs/pearl) builds clean
   with maturin on Python 3.12; MeowMiner uses it for share packaging and
   pre-submit verification, so wire-format bugs are structurally impossible.
@@ -70,15 +78,17 @@ The "hashrate" everyone quotes = MACs/s against graded jackpots
 
 ## 4. The plan to win, in order
 
-### Step 0 — pin the live network constants (30 min, desktop)
-`MiningConfiguration` (k=common_dim, rank, patterns) is consensus data not
-carried by stratum. Confirm against a synced pearld
-(`getblocktemplate` carries it) or by asking in the Pearl discord, then pin
-via `meowminer --config-bytes <52-byte-hex>` in the flight sheet and a
-constant in `netconfig.py`. Also confirm the herominers PRL stratum port
-(this sandbox couldn't load their site). Verifier-enforced constraints
-confirmed against pearl_mining: `k >= 16*rank`, tile `h*w >= 32`, network
-MMAType = `Int7xInt7ToInt32`.
+### Step 0 — confirm pool specifics (15 min, desktop)
+RESOLVED: the MiningConfiguration does NOT need network pinning — the verifier
+reconstructs it from the submitted proof (patterns via `list_to_pattern(row
+indices)`, k/rank from proof fields; zk-pow/src/ffi/plain_proof.rs::
+parse_plain_proof), so the miner picks its own dimensions and share economics
+are dimension-neutral. `netconfig.py` defaults to the reference miner's 2x64
+hash tile with k=4096. Verifier-enforced sanity limits (confirmed empirically
+against pearl_mining): `k >= 16*rank`, tile `h*w >= 32`, MMAType
+`Int7xInt7ToInt32`, signal in [-64, 64].
+Still to confirm on the desktop: the herominers PRL stratum port (their site
+is blocked from this sandbox) and the payout wallet (see bottom).
 
 ### Step 1 — first light on a 4070 Ti Super (hours)
 ```
